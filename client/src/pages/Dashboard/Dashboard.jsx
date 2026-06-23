@@ -61,10 +61,10 @@ function Dashboard() {
     const fetchStats = async () => {
         try {
             const token = localStorage.getItem("token");
-            const interviewRes = await axios.get("http://localhost:5000/api/interviews", {
+            const interviewRes = await axios.get("https://praveentech-backend.onrender.com/api/interviews", {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            const analyticsRes = await axios.get("http://localhost:5000/api/analytics", {
+            const analyticsRes = await axios.get("https://praveentech-backend.onrender.com/api/analytics", {
                 headers: { Authorization: `Bearer ${token}` }
             }).catch(() => null);
 

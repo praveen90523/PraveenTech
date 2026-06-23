@@ -249,7 +249,7 @@ function InterviewSession() {
     const fetchInterview = async () => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.get(`http://localhost:5000/api/interviews/${id}`, {
+            const res = await axios.get(`https://praveentech-backend.onrender.com/api/interviews/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -280,7 +280,7 @@ function InterviewSession() {
             const token = localStorage.getItem("token");
 
             const res = await axios.post(
-                `http://localhost:5000/api/interviews/${id}/answer`,
+                `https://praveentech-backend.onrender.com/api/interviews/${id}/answer`,
                 {
                     question: interview.questions[currentQuestion],
                     answer,
@@ -311,7 +311,7 @@ function InterviewSession() {
             const token = localStorage.getItem("token");
 
             const res = await axios.post(
-                `http://localhost:5000/api/interviews/${id}/answer`,
+                `https://praveentech-backend.onrender.com/api/interviews/${id}/answer`,
                 {
                     question: interview.questions[currentQuestion],
                     answer: "",
@@ -338,7 +338,7 @@ function InterviewSession() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.put(
-                `http://localhost:5000/api/interviews/${id}/bookmark`,
+                `https://praveentech-backend.onrender.com/api/interviews/${id}/bookmark`,
                 { questionIndex: currentQuestion },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -360,7 +360,7 @@ function InterviewSession() {
             try {
                 const token = localStorage.getItem("token");
                 await axios.put(
-                    `http://localhost:5000/api/interviews/${id}/notes`,
+                    `https://praveentech-backend.onrender.com/api/interviews/${id}/notes`,
                     { notes: val },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
@@ -387,7 +387,7 @@ function InterviewSession() {
             const token = localStorage.getItem("token");
 
             await axios.post(
-                `http://localhost:5000/api/interviews/${id}/complete`,
+                `https://praveentech-backend.onrender.com/api/interviews/${id}/complete`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -466,11 +466,10 @@ function InterviewSession() {
             <div className="bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800/80 rounded-2xl px-5 py-3.5 mb-5 flex justify-between items-center shadow-sm">
                 <div>
                     <div className="flex items-center gap-2 mb-0.5">
-                        <span className={`text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-widest ${
-                            isCodingMode
+                        <span className={`text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-widest ${isCodingMode
                                 ? "bg-violet-100 dark:bg-violet-950/60 text-violet-700 dark:text-violet-400"
                                 : "bg-indigo-100 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400"
-                        }`}>
+                            }`}>
                             {isCodingMode ? "Coding Challenge" : (interview.mode === "executive" ? "Executive Round" : "Technical Concept")}
                         </span>
                         <span className="text-[9px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
@@ -535,18 +534,16 @@ function InterviewSession() {
 
                         {/* AI Coach tile */}
                         <div className="bg-white dark:bg-slate-800 bg-gradient-to-br from-blue-50 via-white to-indigo-50/50 dark:from-slate-900 dark:via-slate-900/80 dark:to-indigo-950 border border-slate-200 dark:border-slate-700 rounded-2xl flex flex-col items-center justify-center relative overflow-hidden p-4 min-h-[190px] shadow-sm dark:shadow-lg dark:shadow-[0_0_20px_rgba(99,102,241,0.15)]">
-                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all duration-300 ${
-                                isSpeaking
+                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all duration-300 ${isSpeaking
                                     ? "bg-indigo-100 ring-4 ring-indigo-200/55 dark:bg-indigo-600 dark:ring-indigo-500/30 scale-105"
                                     : isRecording
-                                    ? "bg-rose-500 ring-4 ring-rose-300/30 dark:bg-rose-600 dark:ring-rose-500/30 animate-pulse"
-                                    : "bg-indigo-50/80 border border-indigo-100 dark:bg-indigo-950/40 dark:border-indigo-900/30"
-                            }`}>
-                                <Bot className={`w-7 h-7 ${
-                                    isSpeaking || isRecording 
-                                        ? "text-white" 
+                                        ? "bg-rose-500 ring-4 ring-rose-300/30 dark:bg-rose-600 dark:ring-rose-500/30 animate-pulse"
+                                        : "bg-indigo-50/80 border border-indigo-100 dark:bg-indigo-950/40 dark:border-indigo-900/30"
+                                }`}>
+                                <Bot className={`w-7 h-7 ${isSpeaking || isRecording
+                                        ? "text-white"
                                         : "text-indigo-600 dark:text-indigo-400"
-                                }`} />
+                                    }`} />
                             </div>
                             <h3 className="text-slate-805 dark:text-slate-100 font-bold text-xs tracking-wide">Coach Praveen Tech</h3>
 
@@ -554,8 +551,8 @@ function InterviewSession() {
                             <div className="flex items-center gap-1 mt-1.5 h-5">
                                 {isSpeaking ? (
                                     <>
-                                        {[0.1,0.2,0.3,0.4].map((d,i) => (
-                                            <div key={i} className="w-0.5 bg-indigo-600 dark:bg-white/80 rounded animate-bounce" style={{ height: `${[10,16,8,14][i]}px`, animationDelay: `${d}s` }} />
+                                        {[0.1, 0.2, 0.3, 0.4].map((d, i) => (
+                                            <div key={i} className="w-0.5 bg-indigo-600 dark:bg-white/80 rounded animate-bounce" style={{ height: `${[10, 16, 8, 14][i]}px`, animationDelay: `${d}s` }} />
                                         ))}
                                         <span className="text-[9px] text-indigo-600 dark:text-white/80 font-bold ml-1 uppercase tracking-wider">Speaking</span>
                                     </>
@@ -572,11 +569,10 @@ function InterviewSession() {
                             <div className="absolute top-2.5 right-2.5 flex gap-1.5">
                                 <button
                                     onClick={toggleMute}
-                                    className={`p-1.5 rounded-lg border transition ${
-                                        isMuted 
-                                            ? "bg-rose-50 dark:bg-rose-950/40 border-rose-250 dark:border-rose-900/50 text-rose-600 dark:text-rose-400" 
+                                    className={`p-1.5 rounded-lg border transition ${isMuted
+                                            ? "bg-rose-50 dark:bg-rose-950/40 border-rose-250 dark:border-rose-900/50 text-rose-600 dark:text-rose-400"
                                             : "bg-slate-100 dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-605 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600"
-                                    }`}
+                                        }`}
                                     title={isMuted ? "Unmute AI" : "Mute AI"}
                                 >
                                     {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
@@ -615,11 +611,10 @@ function InterviewSession() {
                             </div>
                             <button
                                 onClick={handleToggleBookmark}
-                                className={`p-2 rounded-xl transition shrink-0 ${
-                                    interview.bookmarkedQuestions?.includes(currentQuestion)
+                                className={`p-2 rounded-xl transition shrink-0 ${interview.bookmarkedQuestions?.includes(currentQuestion)
                                         ? "text-amber-500 bg-amber-50 dark:bg-amber-950/30"
                                         : "text-slate-300 dark:text-slate-600 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
-                                }`}
+                                    }`}
                                 title="Bookmark Question"
                             >
                                 <Bookmark className="w-4 h-4 fill-current" />
@@ -637,11 +632,10 @@ function InterviewSession() {
                                             key={mode}
                                             type="button"
                                             onClick={() => setInputMode(mode)}
-                                            className={`px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                                                inputMode === mode
+                                            className={`px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${inputMode === mode
                                                     ? "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 shadow-sm"
                                                     : "text-slate-500 dark:text-slate-400 hover:text-slate-705 dark:hover:text-slate-300"
-                                            }`}
+                                                }`}
                                         >
                                             {mode === "text" ? "✏️ Text" : "🎙️ Voice"}
                                         </button>
@@ -654,11 +648,10 @@ function InterviewSession() {
                                             type="button"
                                             onClick={toggleRecording}
                                             disabled={submitting}
-                                            className={`w-14 h-14 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-md ${
-                                                isRecording
+                                            className={`w-14 h-14 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-md ${isRecording
                                                     ? "bg-rose-500 text-white animate-pulse ring-4 ring-rose-300/40"
                                                     : "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600"
-                                            }`}
+                                                }`}
                                         >
                                             {isRecording ? <Mic className="w-5 h-5" /> : <MicOff className="w-5 h-5" />}
                                         </button>
@@ -688,11 +681,10 @@ function InterviewSession() {
                                                     ? "// Write your solution code here...\nfunction solution() {\n  \n}"
                                                     : "Type your answer here…"
                                             }
-                                            className={`w-full p-4 rounded-xl text-[13px] leading-relaxed transition focus:outline-none focus:ring-2 resize-none border ${
-                                                isCodingMode
+                                            className={`w-full p-4 rounded-xl text-[13px] leading-relaxed transition focus:outline-none focus:ring-2 resize-none border ${isCodingMode
                                                     ? "font-mono bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-800 dark:text-indigo-300 placeholder-slate-400 dark:placeholder-slate-700 focus:ring-violet-500/30"
                                                     : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-555 focus:ring-indigo-500/30 focus:border-indigo-500 dark:focus:border-indigo-500"
-                                            }`}
+                                                }`}
                                             disabled={submitting}
                                         />
                                         {isCodingMode && (
@@ -732,13 +724,12 @@ function InterviewSession() {
                                             Confidence: <span className="font-semibold text-slate-705 dark:text-slate-300">{evaluationResult.confidenceLevel || "Medium"}</span>
                                         </p>
                                     </div>
-                                    <div className={`px-3 py-1 rounded-xl border text-xs font-black ${
-                                        evaluationResult.score >= 8
+                                    <div className={`px-3 py-1 rounded-xl border text-xs font-black ${evaluationResult.score >= 8
                                             ? "bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800 text-green-700 dark:text-green-400"
                                             : evaluationResult.score >= 5
-                                            ? "bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-400"
-                                            : "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800 text-red-700 dark:text-red-400"
-                                    }`}>
+                                                ? "bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-400"
+                                                : "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800 text-red-700 dark:text-red-400"
+                                        }`}>
                                         {evaluationResult.score} / 10
                                     </div>
                                 </div>
@@ -846,11 +837,10 @@ function InterviewSession() {
                                 },
                             ].map((hint, i) => (
                                 <div key={i} className="flex items-center gap-2.5">
-                                    <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-black shrink-0 transition-colors ${
-                                        hint.check
+                                    <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-black shrink-0 transition-colors ${hint.check
                                             ? "bg-green-50 dark:bg-green-950/50 text-green-605 dark:text-green-400"
                                             : "bg-slate-105 dark:bg-slate-700 text-slate-350 dark:text-slate-500"
-                                    }`}>
+                                        }`}>
                                         ✓
                                     </span>
                                     <span className="text-[11px] font-medium text-slate-650 dark:text-slate-300">{hint.label}</span>
@@ -899,11 +889,10 @@ function InterviewSession() {
                             onClick={toggleRecording}
                             disabled={submitting}
                             title={isRecording ? "Stop dictation" : "Start voice dictation"}
-                            className={`p-2.5 rounded-xl border transition-all active:scale-95 cursor-pointer text-xs font-bold flex items-center gap-1.5 ${
-                                isRecording
+                            className={`p-2.5 rounded-xl border transition-all active:scale-95 cursor-pointer text-xs font-bold flex items-center gap-1.5 ${isRecording
                                     ? "bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400"
                                     : "bg-slate-100 dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600"
-                            }`}
+                                }`}
                         >
                             {isRecording ? <Mic className="w-4 h-4" /> : <MicOff className="w-4 h-4" />}
                         </button>
@@ -912,11 +901,10 @@ function InterviewSession() {
                     <button
                         onClick={toggleCamera}
                         title={isCameraOn ? "Mute webcam" : "Unmute webcam"}
-                        className={`p-2.5 rounded-xl border transition active:scale-95 cursor-pointer ${
-                            isCameraOn
+                        className={`p-2.5 rounded-xl border transition active:scale-95 cursor-pointer ${isCameraOn
                                 ? "bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800 text-green-600 dark:text-green-400"
                                 : "bg-slate-100 dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600"
-                        }`}
+                            }`}
                     >
                         {isCameraOn ? <Video className="w-4 h-4" /> : <VideoOff className="w-4 h-4" />}
                     </button>

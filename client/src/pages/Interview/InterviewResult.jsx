@@ -20,7 +20,7 @@ const CircularGauge = ({ percent, label, subtitle, colorClass = "stroke-indigo-6
     const strokeWidth = 6;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference - (percent / 100) * circumference;
-    
+
     return (
         <div className="flex flex-col items-center text-center bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-3xs">
             <div className="relative w-20 h-20 flex items-center justify-center">
@@ -79,7 +79,7 @@ function InterviewResult() {
     const fetchInterviewResult = async () => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.get(`http://localhost:5000/api/interviews/${id}`, {
+            const res = await axios.get(`https://praveentech-backend.onrender.com/api/interviews/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setInterview(res.data.interview);
@@ -108,7 +108,7 @@ function InterviewResult() {
         text += `Difficulty Level: ${interview.difficulty}\n`;
         text += `Placement Status: ${interview.resultStatus || "Completed"}\n`;
         text += `Overall Score: ${interview.finalScore * 10}% (${interview.finalScore} / 10)\n\n`;
-        
+
         text += `--------------------------------------------------\n`;
         text += `               CORE PLACEMENT METRICS             \n`;
         text += `--------------------------------------------------\n`;
@@ -116,14 +116,14 @@ function InterviewResult() {
         text += `Communication Style: ${interview.communication || "N/A"}\n`;
         text += `Delivery Confidence: ${interview.confidence || "N/A"}\n`;
         text += `HR & Coding Readiness: ${interview.hrReadiness || "N/A"}\n\n`;
-        
+
         text += `--------------------------------------------------\n`;
         text += `               EXECUTIVE SUMMARY                  \n`;
         text += `--------------------------------------------------\n`;
         text += `Strengths Summary:\n  ${interview.strengthsSummary || "No direct summary."}\n\n`;
         text += `Areas of Improvement:\n  ${interview.improvementAreasSummary || "Refer to question breakdowns."}\n\n`;
         text += `Recommended Revision Topics:\n  ${(interview.recommendedTopics || []).join(", ") || "None."}\n\n`;
-        
+
         text += `--------------------------------------------------\n`;
         text += `               DETAILED QUESTION BREAKDOWN        \n`;
         text += `--------------------------------------------------\n`;
@@ -139,7 +139,7 @@ function InterviewResult() {
                 text += `\tSuggested reference model: ${ans.correctAnswer}\n`;
             }
         });
-        
+
         const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
         const element = document.createElement("a");
         element.href = URL.createObjectURL(blob);
@@ -193,11 +193,10 @@ function InterviewResult() {
                     </div>
                     <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                            <span className={`text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
-                                isPassed 
-                                    ? "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-450 border border-emerald-100 dark:border-emerald-900/30" 
+                            <span className={`text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider ${isPassed
+                                    ? "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-450 border border-emerald-100 dark:border-emerald-900/30"
                                     : "bg-amber-50 dark:bg-amber-950/20 text-amber-605 dark:text-amber-450 border border-amber-100 dark:border-amber-900/30"
-                            }`}>
+                                }`}>
                                 {isPassed ? `✓ ${status}` : `⚠ ${status}`}
                             </span>
                             <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">
@@ -239,7 +238,7 @@ function InterviewResult() {
 
             {/* Circular gauges & Action Sidebar Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
-                
+
                 {/* Circular skill gauges */}
                 <div className="lg:col-span-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 sm:p-6 shadow-sm dark:shadow-lg">
                     <h3 className="text-[10px] font-bold uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-5 flex items-center gap-1.5">
@@ -248,33 +247,33 @@ function InterviewResult() {
                     </h3>
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        
-                        <CircularGauge 
-                            percent={getMetricPercent(interview.technicalKnowledge)} 
-                            label="Tech Knowledge" 
-                            subtitle="Conceptual correct scope" 
-                            colorClass="stroke-teal-500 dark:stroke-teal-400" 
+
+                        <CircularGauge
+                            percent={getMetricPercent(interview.technicalKnowledge)}
+                            label="Tech Knowledge"
+                            subtitle="Conceptual correct scope"
+                            colorClass="stroke-teal-500 dark:stroke-teal-400"
                         />
 
-                        <CircularGauge 
-                            percent={getMetricPercent(interview.communication)} 
-                            label="Communication" 
-                            subtitle="Articulation & speed" 
-                            colorClass="stroke-violet-600 dark:stroke-violet-405" 
+                        <CircularGauge
+                            percent={getMetricPercent(interview.communication)}
+                            label="Communication"
+                            subtitle="Articulation & speed"
+                            colorClass="stroke-violet-600 dark:stroke-violet-405"
                         />
 
-                        <CircularGauge 
-                            percent={getMetricPercent(interview.confidence)} 
-                            label="Confidence" 
-                            subtitle="Pacing & posture" 
-                            colorClass="stroke-emerald-600 dark:stroke-emerald-400" 
+                        <CircularGauge
+                            percent={getMetricPercent(interview.confidence)}
+                            label="Confidence"
+                            subtitle="Pacing & posture"
+                            colorClass="stroke-emerald-600 dark:stroke-emerald-400"
                         />
 
-                        <CircularGauge 
-                            percent={getMetricPercent(interview.hrReadiness)} 
+                        <CircularGauge
+                            percent={getMetricPercent(interview.hrReadiness)}
                             label={isCoding ? "Code Standards" : "HR Readiness"}
-                            subtitle="Recruiter fit metrics" 
-                            colorClass="stroke-amber-600 dark:stroke-amber-400" 
+                            subtitle="Recruiter fit metrics"
+                            colorClass="stroke-amber-600 dark:stroke-amber-400"
                         />
 
                     </div>
@@ -337,7 +336,7 @@ function InterviewResult() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                         {interview.recommendedTopics.map((topic, i) => (
-                            <span 
+                            <span
                                 key={i}
                                 className="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100/50 dark:border-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold px-3 py-1 rounded-lg uppercase tracking-wider"
                             >
@@ -360,17 +359,16 @@ function InterviewResult() {
                         const isWeak = item.score < 5;
                         const isSkipped = item.isSkipped;
                         const isBookmarked = interview.bookmarkedQuestions?.includes(index);
-                        
+
                         return (
                             <div
                                 key={index}
-                                className={`border rounded-xl p-4.5 transition duration-200 hover:shadow-xs relative ${
-                                    isSkipped
+                                className={`border rounded-xl p-4.5 transition duration-200 hover:shadow-xs relative ${isSkipped
                                         ? "border-amber-100/45 dark:border-amber-950/20 bg-amber-50/5 dark:bg-amber-950/5"
-                                        : (isHigh 
-                                            ? "border-emerald-200/60 dark:border-emerald-950/30 bg-emerald-50/5 dark:bg-emerald-950/5" 
+                                        : (isHigh
+                                            ? "border-emerald-200/60 dark:border-emerald-950/30 bg-emerald-50/5 dark:bg-emerald-950/5"
                                             : (isWeak ? "border-rose-200/60 dark:border-rose-950/30 bg-rose-50/5 dark:bg-rose-950/5" : "border-slate-200/60 dark:border-slate-800/80 bg-slate-50/10 dark:bg-slate-900/10"))
-                                }`}
+                                    }`}
                             >
                                 <div className="flex justify-between items-center gap-2 mb-3">
                                     <h4 className="font-bold text-xs text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
@@ -387,11 +385,10 @@ function InterviewResult() {
                                                 Skipped
                                             </span>
                                         ) : (
-                                            <span className={`px-2.5 py-0.5 rounded-lg text-[9px] font-bold border ${
-                                                isHigh
+                                            <span className={`px-2.5 py-0.5 rounded-lg text-[9px] font-bold border ${isHigh
                                                     ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/30 text-emerald-700 dark:text-emerald-400"
                                                     : (isWeak ? "bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-900/30 text-rose-700 dark:text-rose-400" : "bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/30 text-amber-600 dark:text-amber-400")
-                                            }`}>
+                                                }`}>
                                                 Score: {item.score} / 10
                                             </span>
                                         )}
@@ -413,7 +410,7 @@ function InterviewResult() {
 
                                         <div className="space-y-2 mt-3.5 text-xs text-slate-700 dark:text-slate-300">
                                             <p className="leading-relaxed"><strong className="text-slate-800 dark:text-slate-100 font-bold">AI Evaluation Feedback:</strong> {item.feedback}</p>
-                                            
+
                                             {item.strengths && (
                                                 <div className="bg-emerald-50/40 dark:bg-emerald-950/15 p-2.5 rounded-xl border border-emerald-100/30 dark:border-emerald-900/20 text-slate-700 dark:text-slate-300">
                                                     <strong className="text-emerald-700 dark:text-emerald-400 font-bold">Strengths:</strong> {item.strengths}

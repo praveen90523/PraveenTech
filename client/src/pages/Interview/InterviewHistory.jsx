@@ -18,7 +18,7 @@ function InterviewHistory() {
             const token = localStorage.getItem("token");
 
             const res = await axios.get(
-                "http://localhost:5000/api/interviews",
+                "https://praveentech-backend.onrender.com/api/interviews",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -104,11 +104,10 @@ function InterviewHistory() {
                             >
                                 <div className="flex justify-between items-start mb-4">
                                     <div className="flex flex-wrap gap-1.5">
-                                        <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider border ${
-                                            interview.type === "coding" 
-                                                ? "bg-violet-50 dark:bg-violet-950/20 text-violet-600 dark:text-violet-400 border-violet-100 dark:border-violet-900/30" 
+                                        <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider border ${interview.type === "coding"
+                                                ? "bg-violet-50 dark:bg-violet-950/20 text-violet-600 dark:text-violet-400 border-violet-100 dark:border-violet-900/30"
                                                 : (interview.mode === "executive" ? "bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-900/30" : "bg-indigo-50 dark:bg-indigo-950/20 text-indigo-600 dark:text-indigo-400 border-indigo-100 dark:border-indigo-900/30")
-                                        }`}>
+                                            }`}>
                                             {interview.type === "coding" ? "Coding" : (interview.mode === "executive" ? "Executive" : "Concept")}
                                         </span>
                                         <span className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded-full text-[9px] font-bold">
@@ -117,11 +116,10 @@ function InterviewHistory() {
                                     </div>
 
                                     <span
-                                        className={`px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider border ${
-                                            interview.status === "completed"
+                                        className={`px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider border ${interview.status === "completed"
                                                 ? "bg-emerald-50 dark:bg-emerald-950/20 border-emerald-100 dark:border-emerald-900/30 text-emerald-700 dark:text-emerald-400"
                                                 : "bg-amber-50 dark:bg-amber-950/20 border-amber-100 dark:border-amber-900/30 text-amber-700 dark:text-amber-400"
-                                        }`}
+                                            }`}
                                     >
                                         {interview.status}
                                     </span>
@@ -163,24 +161,24 @@ function InterviewHistory() {
                                         className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl text-xs transition duration-200"
                                     >
                                         {interview.status ===
-                                        "completed"
+                                            "completed"
                                             ? "View"
                                             : "Continue"}
                                     </button>
 
                                     {interview.status ===
                                         "completed" && (
-                                        <button
-                                            onClick={() =>
-                                                navigate(
-                                                    `/result/${interview._id}`
-                                                )
-                                            }
-                                            className="flex-1 border border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 font-bold py-2.5 rounded-xl text-xs transition duration-200"
-                                        >
-                                            Result
-                                        </button>
-                                    )}
+                                            <button
+                                                onClick={() =>
+                                                    navigate(
+                                                        `/result/${interview._id}`
+                                                    )
+                                                }
+                                                className="flex-1 border border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 font-bold py-2.5 rounded-xl text-xs transition duration-200"
+                                            >
+                                                Result
+                                            </button>
+                                        )}
                                 </div>
                             </div>
                         ))}

@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-    ChevronLeft, 
-    Map, 
-    HelpCircle, 
-    Award, 
-    ArrowRight, 
-    BookOpen, 
-    CheckCircle, 
-    Info, 
-    Play, 
+import {
+    ChevronLeft,
+    Map,
+    HelpCircle,
+    Award,
+    ArrowRight,
+    BookOpen,
+    CheckCircle,
+    Info,
+    Play,
     ExternalLink,
     ChevronDown,
     ChevronUp
@@ -24,7 +24,7 @@ function PreparationSession() {
     const [session, setSession] = useState(null);
     const [questions, setQuestions] = useState([]);
     const [quiz, setQuiz] = useState(null);
-    
+
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState("roadmap");
     const [questionTab, setQuestionTab] = useState("THEORY");
@@ -39,7 +39,7 @@ function PreparationSession() {
     const fetchSessionDetails = async () => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.get(`http://localhost:5000/api/preparation/${id}`, {
+            const res = await axios.get(`https://praveentech-backend.onrender.com/api/preparation/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.success) {
@@ -59,7 +59,7 @@ function PreparationSession() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.put(
-                `http://localhost:5000/api/preparation/question/${qId}`,
+                `https://praveentech-backend.onrender.com/api/preparation/question/${qId}`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -79,7 +79,7 @@ function PreparationSession() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.post(
-                `http://localhost:5000/api/preparation/${id}/quiz`,
+                `https://praveentech-backend.onrender.com/api/preparation/${id}/quiz`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -107,8 +107,8 @@ function PreparationSession() {
             <div className="w-full text-center py-20">
                 <span className="text-4xl mb-4 block">⚠️</span>
                 <h2 className="text-lg font-bold text-slate-800 dark:text-slate-200">Session Not Found</h2>
-                <button 
-                    onClick={() => navigate("/preparation")} 
+                <button
+                    onClick={() => navigate("/preparation")}
                     className="mt-5 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-xs font-semibold shadow"
                 >
                     Back to Hub
@@ -122,7 +122,7 @@ function PreparationSession() {
     return (
         <div className="w-full pb-10">
             <div className="max-w-4xl mx-auto">
-                
+
                 {/* Back button */}
                 <button
                     onClick={() => navigate("/preparation")}
@@ -135,11 +135,10 @@ function PreparationSession() {
                 <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 sm:p-8 mb-8 shadow-sm">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
                         <div>
-                            <span className={`text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
-                                session.difficulty === "Advanced" ? "bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-900/30" :
-                                session.difficulty === "Intermediate" ? "bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-900/30" :
-                                "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30"
-                            }`}>
+                            <span className={`text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider ${session.difficulty === "Advanced" ? "bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-900/30" :
+                                    session.difficulty === "Intermediate" ? "bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-900/30" :
+                                        "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30"
+                                }`}>
                                 {session.difficulty} Module
                             </span>
                             <h1 className="text-2xl font-black text-slate-800 dark:text-slate-100 mt-2">{session.topic}</h1>
@@ -171,31 +170,28 @@ function PreparationSession() {
                     <div className="flex border-b border-slate-100 dark:border-slate-800/80 gap-2">
                         <button
                             onClick={() => setActiveTab("roadmap")}
-                            className={`pb-3.5 px-4 font-bold text-xs border-b-2 transition flex items-center gap-1.5 ${
-                                activeTab === "roadmap"
+                            className={`pb-3.5 px-4 font-bold text-xs border-b-2 transition flex items-center gap-1.5 ${activeTab === "roadmap"
                                     ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
                                     : "border-transparent text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
-                            }`}
+                                }`}
                         >
                             <Map className="w-4 h-4" /> Learning Roadmap
                         </button>
                         <button
                             onClick={() => setActiveTab("questions")}
-                            className={`pb-3.5 px-4 font-bold text-xs border-b-2 transition flex items-center gap-1.5 ${
-                                activeTab === "questions"
+                            className={`pb-3.5 px-4 font-bold text-xs border-b-2 transition flex items-center gap-1.5 ${activeTab === "questions"
                                     ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
                                     : "border-transparent text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
-                            }`}
+                                }`}
                         >
                             <HelpCircle className="w-4 h-4" /> Practice Questions
                         </button>
                         <button
                             onClick={() => setActiveTab("quiz")}
-                            className={`pb-3.5 px-4 font-bold text-xs border-b-2 transition flex items-center gap-1.5 ${
-                                activeTab === "quiz"
+                            className={`pb-3.5 px-4 font-bold text-xs border-b-2 transition flex items-center gap-1.5 ${activeTab === "quiz"
                                     ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
                                     : "border-transparent text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
-                            }`}
+                                }`}
                         >
                             <Award className="w-4 h-4" /> Topic Quiz
                         </button>
@@ -212,11 +208,11 @@ function PreparationSession() {
                                     <div className="absolute -left-[41px] top-1 bg-white dark:bg-slate-800 border-2 border-indigo-600 dark:border-indigo-500 w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] text-indigo-600 dark:text-indigo-400 shadow-sm z-10">
                                         {index + 1}
                                     </div>
-                                    
+
                                     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 shadow-sm hover-card-effect">
                                         <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1">{item.phase}</h3>
                                         <p className="text-xs text-slate-450 dark:text-slate-400 leading-relaxed mb-4">{item.description}</p>
-                                        
+
                                         {item.resources && item.resources.length > 0 && (
                                             <div>
                                                 <h4 className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">Suggested Resources</h4>
@@ -251,11 +247,10 @@ function PreparationSession() {
                                         setQuestionTab(type);
                                         setExpandedQuestion(null);
                                     }}
-                                    className={`px-3.5 py-1.5 rounded-xl text-[10px] font-bold transition duration-200 ${
-                                        questionTab === type
+                                    className={`px-3.5 py-1.5 rounded-xl text-[10px] font-bold transition duration-200 ${questionTab === type
                                             ? "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-50 shadow-sm"
                                             : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
-                                    }`}
+                                        }`}
                                 >
                                     {type}
                                 </button>
@@ -271,9 +266,8 @@ function PreparationSession() {
                                 {filteredQuestions.map((q) => (
                                     <div
                                         key={q._id}
-                                        className={`bg-white dark:bg-slate-800 border rounded-2xl p-5 shadow-sm transition-all duration-300 ${
-                                            q.completed ? "border-emerald-200 bg-emerald-50/5 dark:bg-emerald-900/10" : "border-slate-200 dark:border-slate-700"
-                                        }`}
+                                        className={`bg-white dark:bg-slate-800 border rounded-2xl p-5 shadow-sm transition-all duration-300 ${q.completed ? "border-emerald-200 bg-emerald-50/5 dark:bg-emerald-900/10" : "border-slate-200 dark:border-slate-700"
+                                            }`}
                                     >
                                         <div className="flex items-start gap-4 justify-between">
                                             <div className="flex items-start gap-3.5">
@@ -281,11 +275,10 @@ function PreparationSession() {
                                                 <button
                                                     onClick={() => handleToggleQuestion(q._id)}
                                                     disabled={togglingId === q._id}
-                                                    className={`w-5.5 h-5.5 mt-0.5 flex items-center justify-center rounded-lg border transition-all ${
-                                                        q.completed
+                                                    className={`w-5.5 h-5.5 mt-0.5 flex items-center justify-center rounded-lg border transition-all ${q.completed
                                                             ? "bg-emerald-600 border-emerald-600 text-white"
                                                             : "border-slate-300 dark:border-slate-700 hover:border-indigo-600 dark:hover:border-indigo-500 bg-white dark:bg-slate-900"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {q.completed && <span className="text-[10px]">✓</span>}
                                                 </button>
@@ -295,14 +288,13 @@ function PreparationSession() {
                                                         {q.title}
                                                     </h3>
                                                     <p className="text-slate-400 dark:text-slate-400 text-xs mt-1 leading-relaxed">{q.description}</p>
-                                                    
+
                                                     {/* Metadata Badges */}
                                                     <div className="flex flex-wrap items-center gap-2 mt-3.5">
-                                                        <span className={`text-[9px] font-bold px-2 py-0.5 rounded ${
-                                                            q.difficulty === "Hard" ? "bg-rose-50 dark:bg-rose-900/20 text-rose-600" :
-                                                            q.difficulty === "Medium" ? "bg-amber-50 dark:bg-amber-900/20 text-amber-600" :
-                                                            "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600"
-                                                        }`}>
+                                                        <span className={`text-[9px] font-bold px-2 py-0.5 rounded ${q.difficulty === "Hard" ? "bg-rose-50 dark:bg-rose-900/20 text-rose-600" :
+                                                                q.difficulty === "Medium" ? "bg-amber-50 dark:bg-amber-900/20 text-amber-600" :
+                                                                    "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600"
+                                                            }`}>
                                                             {q.difficulty}
                                                         </span>
                                                         <span className="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
@@ -336,7 +328,7 @@ function PreparationSession() {
                                         {/* Expandable answer panel */}
                                         <AnimatePresence>
                                             {expandedQuestion === q._id && q.correctAnswer && (
-                                                <motion.div 
+                                                <motion.div
                                                     initial={{ opacity: 0, height: 0 }}
                                                     animate={{ opacity: 1, height: "auto" }}
                                                     exit={{ opacity: 0, height: 0 }}
@@ -362,7 +354,7 @@ function PreparationSession() {
                         <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 sm:p-8 text-center shadow-sm">
                             <span className="text-4xl mb-4 block">📝</span>
                             <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">Check Your Knowledge</h3>
-                            
+
                             {quiz && quiz.completed ? (
                                 <div className="mt-4">
                                     <p className="text-xs text-slate-400 dark:text-slate-500 mb-6 leading-relaxed">
@@ -372,7 +364,7 @@ function PreparationSession() {
                                         <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold block uppercase tracking-wider">Your Score</span>
                                         <span className="text-3xl font-black text-indigo-600 dark:text-indigo-400 mt-1 block">{quiz.score}%</span>
                                     </div>
-                                    
+
                                     <button
                                         onClick={handleStartQuiz}
                                         disabled={quizGenerating}

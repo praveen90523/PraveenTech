@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { 
-    Brain, 
-    Code2, 
-    Video, 
-    Sparkles, 
-    AlertCircle, 
-    UserCheck, 
+import {
+    Brain,
+    Code2,
+    Video,
+    Sparkles,
+    AlertCircle,
+    UserCheck,
     Flame,
     Terminal,
     Target,
@@ -50,8 +50,8 @@ export default function CreateInterview() {
 
             const payload = {
                 role: formData.role,
-                domain: moduleType === "coding" 
-                    ? formData.domain 
+                domain: moduleType === "coding"
+                    ? formData.domain
                     : (interviewMode === "executive" ? "HR & Behavioral" : formData.domain),
                 difficulty: formData.difficulty,
                 type: moduleType,
@@ -60,7 +60,7 @@ export default function CreateInterview() {
             };
 
             const res = await axios.post(
-                "http://localhost:5000/api/interviews/create",
+                "https://praveentech-backend.onrender.com/api/interviews/create",
                 payload,
                 {
                     headers: {
@@ -104,10 +104,10 @@ export default function CreateInterview() {
             )}
 
             <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-4xl mx-auto">
-                
+
                 {/* Left: Pathway cards & styles selectors */}
                 <div className="lg:col-span-2 space-y-6 flex flex-col justify-start">
-                    
+
                     {/* Module selector cards */}
                     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm dark:shadow-lg">
                         <h2 className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
@@ -115,17 +115,16 @@ export default function CreateInterview() {
                         </h2>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            
+
                             {/* AI Interview card */}
-                            <motion.div 
+                            <motion.div
                                 whileHover={{ y: -2, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.04)" }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => setModuleType("interview")}
-                                className={`border rounded-2xl p-5 cursor-pointer transition-all duration-300 relative flex flex-col justify-between min-h-[160px] group ${
-                                    moduleType === "interview" 
-                                        ? "border-indigo-600 bg-indigo-50/10 dark:border-indigo-500 dark:bg-indigo-950/20 ring-2 ring-indigo-500/20 shadow-xs" 
+                                className={`border rounded-2xl p-5 cursor-pointer transition-all duration-300 relative flex flex-col justify-between min-h-[160px] group ${moduleType === "interview"
+                                        ? "border-indigo-600 bg-indigo-50/10 dark:border-indigo-500 dark:bg-indigo-950/20 ring-2 ring-indigo-500/20 shadow-xs"
                                         : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-slate-300 hover:bg-slate-50/20 dark:hover:bg-slate-700/50 shadow-2xs"
-                                }`}
+                                    }`}
                             >
                                 <div className="flex justify-between items-start">
                                     <div className={`p-2.5 rounded-xl transition duration-300 ${moduleType === "interview" ? "bg-indigo-600 text-white shadow-sm" : "bg-slate-50 dark:bg-slate-900 text-slate-500"}`}>
@@ -144,15 +143,14 @@ export default function CreateInterview() {
                             </motion.div>
 
                             {/* Coding Practice card */}
-                            <motion.div 
+                            <motion.div
                                 whileHover={{ y: -2, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.04)" }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => setModuleType("coding")}
-                                className={`border rounded-2xl p-5 cursor-pointer transition-all duration-300 relative flex flex-col justify-between min-h-[160px] group ${
-                                    moduleType === "coding" 
-                                        ? "border-violet-600 bg-violet-50/10 dark:border-violet-500 dark:bg-violet-950/20 ring-2 ring-violet-500/20 shadow-xs" 
+                                className={`border rounded-2xl p-5 cursor-pointer transition-all duration-300 relative flex flex-col justify-between min-h-[160px] group ${moduleType === "coding"
+                                        ? "border-violet-600 bg-violet-50/10 dark:border-violet-500 dark:bg-violet-950/20 ring-2 ring-violet-500/20 shadow-xs"
                                         : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-slate-300 hover:bg-slate-50/20 dark:hover:bg-slate-700/50 shadow-2xs"
-                                }`}
+                                    }`}
                             >
                                 <div className="flex justify-between items-start">
                                     <div className={`p-2.5 rounded-xl transition duration-300 ${moduleType === "coding" ? "bg-violet-600 text-white shadow-sm" : "bg-slate-50 dark:bg-slate-900 text-slate-500"}`}>
@@ -181,17 +179,16 @@ export default function CreateInterview() {
                             </h2>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                
+
                                 {/* Technical Mode */}
-                                <motion.div 
+                                <motion.div
                                     whileHover={{ y: -1 }}
                                     whileTap={{ scale: 0.99 }}
                                     onClick={() => setInterviewMode("technical")}
-                                    className={`border rounded-xl p-4 cursor-pointer transition-all flex items-center justify-between ${
-                                        interviewMode === "technical" 
-                                            ? "border-indigo-600 bg-indigo-50/10 dark:border-indigo-500 dark:bg-indigo-950/20 ring-1 ring-indigo-500/20" 
+                                    className={`border rounded-xl p-4 cursor-pointer transition-all flex items-center justify-between ${interviewMode === "technical"
+                                            ? "border-indigo-600 bg-indigo-50/10 dark:border-indigo-500 dark:bg-indigo-950/20 ring-1 ring-indigo-500/20"
                                             : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-slate-300 hover:bg-slate-50/30 dark:hover:bg-slate-700/50 text-slate-500"
-                                    }`}
+                                        }`}
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className={`p-2 rounded-lg ${interviewMode === "technical" ? "bg-indigo-600 text-white shadow-sm" : "bg-slate-50 dark:bg-slate-900 text-slate-500"}`}>
@@ -208,15 +205,14 @@ export default function CreateInterview() {
                                 </motion.div>
 
                                 {/* Executive HR Mode */}
-                                <motion.div 
+                                <motion.div
                                     whileHover={{ y: -1 }}
                                     whileTap={{ scale: 0.99 }}
                                     onClick={() => setInterviewMode("executive")}
-                                    className={`border rounded-xl p-4 cursor-pointer transition-all flex items-center justify-between ${
-                                        interviewMode === "executive" 
-                                            ? "border-indigo-600 bg-indigo-50/10 dark:border-indigo-500 dark:bg-indigo-950/20 ring-1 ring-indigo-500/20" 
+                                    className={`border rounded-xl p-4 cursor-pointer transition-all flex items-center justify-between ${interviewMode === "executive"
+                                            ? "border-indigo-600 bg-indigo-50/10 dark:border-indigo-500 dark:bg-indigo-950/20 ring-1 ring-indigo-500/20"
                                             : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-slate-300 hover:bg-slate-50/30 dark:hover:bg-slate-700/50 text-slate-500"
-                                    }`}
+                                        }`}
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className={`p-2 rounded-lg ${interviewMode === "executive" ? "bg-indigo-600 text-white shadow-sm" : "bg-slate-50 dark:bg-slate-900 text-slate-500"}`}>
@@ -292,7 +288,7 @@ export default function CreateInterview() {
                             </h2>
 
                             <div className="space-y-4">
-                                
+
                                 {/* Target Role */}
                                 <div>
                                     <label className="block text-[9px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-wider mb-2">
@@ -381,11 +377,10 @@ export default function CreateInterview() {
                                                 key={level}
                                                 type="button"
                                                 onClick={() => setFormData({ ...formData, difficulty: level })}
-                                                className={`py-2 rounded-xl text-[9px] font-extrabold border transition ${
-                                                    formData.difficulty === level
+                                                className={`py-2 rounded-xl text-[9px] font-extrabold border transition ${formData.difficulty === level
                                                         ? "bg-slate-900 border-slate-900 text-white dark:bg-slate-100 dark:border-slate-105 dark:text-slate-950 shadow-xs"
                                                         : "border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400"
-                                                }`}
+                                                    }`}
                                             >
                                                 {level}
                                             </button>
@@ -404,11 +399,10 @@ export default function CreateInterview() {
                                                 key={count}
                                                 type="button"
                                                 onClick={() => setQuestionCount(count)}
-                                                className={`py-2 rounded-xl text-xs font-extrabold border transition ${
-                                                    questionCount === count
+                                                className={`py-2 rounded-xl text-xs font-extrabold border transition ${questionCount === count
                                                         ? "bg-slate-900 border-slate-900 text-white dark:bg-slate-100 dark:border-slate-105 dark:text-slate-950 shadow-xs"
                                                         : "border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400"
-                                                }`}
+                                                    }`}
                                             >
                                                 {count} Qs
                                             </button>
@@ -446,11 +440,10 @@ export default function CreateInterview() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className={`w-full text-white font-bold py-3.5 px-4 rounded-xl text-xs transition-all duration-205 shadow-sm flex items-center justify-center gap-2 border-0 outline-none select-none active:scale-[0.98] cursor-pointer ${
-                                    moduleType === "coding"
+                                className={`w-full text-white font-bold py-3.5 px-4 rounded-xl text-xs transition-all duration-205 shadow-sm flex items-center justify-center gap-2 border-0 outline-none select-none active:scale-[0.98] cursor-pointer ${moduleType === "coding"
                                         ? "bg-violet-600 hover:bg-violet-750"
                                         : "bg-indigo-600 hover:bg-indigo-750"
-                                }`}
+                                    }`}
                             >
                                 {loading ? (
                                     <>

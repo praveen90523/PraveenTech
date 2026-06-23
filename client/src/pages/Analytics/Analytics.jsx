@@ -39,10 +39,10 @@ export default function Analytics() {
         try {
             const token = localStorage.getItem("token");
             const headers = { Authorization: `Bearer ${token}` };
-            
+
             const [statsRes, achRes] = await Promise.all([
-                axios.get("http://localhost:5000/api/analytics", { headers }),
-                axios.get("http://localhost:5000/api/analytics/achievements", { headers })
+                axios.get("https://praveentech-backend.onrender.com/api/analytics", { headers }),
+                axios.get("https://praveentech-backend.onrender.com/api/analytics/achievements", { headers })
             ]);
 
             if (statsRes.data.success) {
@@ -162,7 +162,7 @@ export default function Analytics() {
             {/* Gamified Stat Summary Banner */}
             <div className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-violet-600 rounded-2xl text-white p-6 md:p-8 mb-8 shadow-md flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
                 <div className="absolute top-0 right-0 transform translate-x-12 -translate-y-12 w-64 h-64 bg-white/5 rounded-full pointer-events-none blur-3xl"></div>
-                
+
                 <div className="flex items-center gap-5 relative z-10 w-full md:w-auto">
                     <div className="relative w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center text-4xl border border-white/20 shrink-0">
                         👑
@@ -173,7 +173,7 @@ export default function Analytics() {
                     <div>
                         <h2 className="text-xl md:text-2xl font-black">{stats?.user?.name || "Student"}</h2>
                         <p className="text-indigo-200 text-xs mt-0.5 font-medium">Ranked candidate in Praveen Tech Placement Hub</p>
-                        
+
                         {/* XP Progress Bar */}
                         <div className="mt-4 w-48 sm:w-60">
                             <div className="flex justify-between text-[9px] text-indigo-150 mb-1 font-bold uppercase tracking-wider">
@@ -205,10 +205,10 @@ export default function Analytics() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                
+
                 {/* Left Side: Score Metrics & Weekly Activity Charts */}
                 <div className="lg:col-span-8 space-y-6 flex flex-col justify-start">
-                    
+
                     {/* Summary Metrics Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 shadow-sm dark:shadow-lg flex items-center gap-4.5">
@@ -221,7 +221,7 @@ export default function Analytics() {
                                 <span className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold">{s.totalResumes} Resumes analyzed</span>
                             </div>
                         </div>
-                        
+
                         <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 shadow-sm dark:shadow-lg flex items-center gap-4.5">
                             <div className="w-13 h-13 bg-emerald-50 dark:bg-indigo-950/40 border border-emerald-100/50 dark:border-indigo-900/30 text-emerald-600 dark:text-emerald-550 rounded-xl flex items-center justify-center shrink-0">
                                 <Video className="w-5 h-5" />
@@ -245,7 +245,7 @@ export default function Analytics() {
                                 Past 7 Days
                             </span>
                         </div>
-                        
+
                         <div className="w-full h-[220px]">
                             {chartData.length === 0 ? (
                                 <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-600">
@@ -343,7 +343,7 @@ export default function Analytics() {
                                 {podiumOrder.map((user) => {
                                     const style = getPodiumStyles(user.rank);
                                     const isSelf = user.email === stats?.user?.email;
-                                    
+
                                     return (
                                         <motion.div
                                             key={user._id}
@@ -375,7 +375,7 @@ export default function Analytics() {
                                                 <p className="text-[8px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider mt-0.5">
                                                     LVL {user.level || 1}
                                                 </p>
-                                                
+
                                                 <span className="inline-block mt-1.5 text-[9px] font-black bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-lg shadow-sm">
                                                     {user.xp} XP
                                                 </span>
@@ -399,24 +399,22 @@ export default function Analytics() {
                                 const rank = idx + 1;
                                 const isSelf = user.email === stats?.user?.email;
                                 const isPodium = rank <= 3;
-                                
+
                                 return (
                                     <div
                                         key={user._id}
-                                        className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
-                                            isSelf
+                                        className={`flex items-center justify-between p-3 rounded-xl border transition-all ${isSelf
                                                 ? "bg-indigo-50/50 dark:bg-indigo-950/20 border-indigo-200 dark:border-indigo-900 shadow-sm"
                                                 : "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
-                                        }`}
+                                            }`}
                                     >
                                         <div className="flex items-center gap-3.5 min-w-0">
                                             {/* Rank Indicator */}
-                                            <span className={`w-5 font-black text-xs text-center shrink-0 ${
-                                                rank === 1 ? "text-yellow-500" :
-                                                rank === 2 ? "text-slate-400" :
-                                                rank === 3 ? "text-orange-500" :
-                                                "text-slate-400 dark:text-slate-500"
-                                            }`}>
+                                            <span className={`w-5 font-black text-xs text-center shrink-0 ${rank === 1 ? "text-yellow-500" :
+                                                    rank === 2 ? "text-slate-400" :
+                                                        rank === 3 ? "text-orange-500" :
+                                                            "text-slate-400 dark:text-slate-500"
+                                                }`}>
                                                 {rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : rank}
                                             </span>
 
@@ -430,9 +428,8 @@ export default function Analytics() {
                                             </div>
 
                                             <div className="min-w-0">
-                                                <h4 className={`text-[11px] font-bold flex items-center gap-1.5 truncate ${
-                                                    isSelf ? "text-indigo-900 dark:text-indigo-300" : "text-slate-700 dark:text-slate-200"
-                                                }`}>
+                                                <h4 className={`text-[11px] font-bold flex items-center gap-1.5 truncate ${isSelf ? "text-indigo-900 dark:text-indigo-300" : "text-slate-700 dark:text-slate-200"
+                                                    }`}>
                                                     {user.name}
                                                     {isSelf && (
                                                         <span className="bg-indigo-600 text-white text-[7px] px-1.5 py-0.5 rounded-full font-black uppercase tracking-wider">
@@ -446,11 +443,10 @@ export default function Analytics() {
                                             </div>
                                         </div>
 
-                                        <span className={`text-[10px] font-black px-2.5 py-1 rounded-lg shrink-0 border ${
-                                            isSelf
+                                        <span className={`text-[10px] font-black px-2.5 py-1 rounded-lg shrink-0 border ${isSelf
                                                 ? "bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 border-indigo-200/50 dark:border-indigo-900/30"
                                                 : "bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700"
-                                        }`}>
+                                            }`}>
                                             {user.xp} XP
                                         </span>
                                     </div>

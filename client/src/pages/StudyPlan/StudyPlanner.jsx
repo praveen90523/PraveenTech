@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-    Calendar, 
-    Flag, 
-    RefreshCw, 
-    CheckCircle2, 
-    ChevronDown, 
-    ChevronUp, 
-    Clock, 
-    Target, 
-    Sparkles, 
-    AlertCircle 
+import {
+    Calendar,
+    Flag,
+    RefreshCw,
+    CheckCircle2,
+    ChevronDown,
+    ChevronUp,
+    Clock,
+    Target,
+    Sparkles,
+    AlertCircle
 } from "lucide-react";
 
 function StudyPlanner() {
@@ -20,7 +20,7 @@ function StudyPlanner() {
     const [targetRole, setTargetRole] = useState("");
     const [timeline, setTimeline] = useState("4 Weeks");
     const [generating, setGenerating] = useState(false);
-    
+
     const [expandedWeek, setExpandedWeek] = useState(0);
     const [toggling, setToggling] = useState(false);
     const [statusMsg, setStatusMsg] = useState("");
@@ -32,7 +32,7 @@ function StudyPlanner() {
     const fetchStudyPlan = async () => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.get("http://localhost:5000/api/study-plan", {
+            const res = await axios.get("https://praveentech-backend.onrender.com/api/study-plan", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.success) {
@@ -54,7 +54,7 @@ function StudyPlanner() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.post(
-                "http://localhost:5000/api/study-plan/generate",
+                "https://praveentech-backend.onrender.com/api/study-plan/generate",
                 { targetRole: targetRole.trim(), timeline },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -77,7 +77,7 @@ function StudyPlanner() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.put(
-                "http://localhost:5000/api/study-plan",
+                "https://praveentech-backend.onrender.com/api/study-plan",
                 { weekIndex: weekIdx, taskIndex: taskIdx },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -97,7 +97,7 @@ function StudyPlanner() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.put(
-                "http://localhost:5000/api/study-plan",
+                "https://praveentech-backend.onrender.com/api/study-plan",
                 { milestoneIndex: mIdx },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -115,10 +115,10 @@ function StudyPlanner() {
         if (!window.confirm("Do you want to reset and formulate a new planner? Your current milestones progress will be reset.")) {
             return;
         }
-        
+
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.delete("http://localhost:5000/api/study-plan", {
+            const res = await axios.delete("https://praveentech-backend.onrender.com/api/study-plan", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.success) {
@@ -133,8 +133,8 @@ function StudyPlanner() {
     const getDaysLeft = (dateString) => {
         const milestoneDate = new Date(dateString);
         const today = new Date();
-        milestoneDate.setHours(0,0,0,0);
-        today.setHours(0,0,0,0);
+        milestoneDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
 
         const diffTime = milestoneDate - today;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -236,10 +236,10 @@ function StudyPlanner() {
             ) : (
                 /* Active Planner Dashboard layout */
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start animate-fadeIn">
-                    
+
                     {/* Left: Weekly checklists */}
                     <div className="lg:col-span-2 space-y-4">
-                        
+
                         {/* Plan Header Card */}
                         <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm dark:shadow-lg">
                             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
@@ -250,7 +250,7 @@ function StudyPlanner() {
                                     <h2 className="text-xl font-black text-slate-800 dark:text-slate-200 mt-2">{studyPlan.targetRole}</h2>
                                     <p className="text-slate-400 dark:text-slate-500 text-[10px] font-semibold mt-1">Timeline Target: {studyPlan.timeline}</p>
                                 </div>
-                                
+
                                 <div className="w-full sm:w-48">
                                     <div className="flex justify-between items-center text-[10px] text-slate-500 dark:text-slate-400 mb-1.5 font-bold">
                                         <span>Total Progress:</span>
@@ -272,7 +272,7 @@ function StudyPlanner() {
                                 const isExpanded = expandedWeek === wIdx;
                                 const completedCount = week.tasks.filter(t => t.completed).length;
                                 const totalCount = week.tasks.length;
-                                
+
                                 return (
                                     <div
                                         key={wIdx}
@@ -293,7 +293,7 @@ function StudyPlanner() {
 
                                         <AnimatePresence>
                                             {isExpanded && (
-                                                <motion.div 
+                                                <motion.div
                                                     initial={{ opacity: 0, height: 0 }}
                                                     animate={{ opacity: 1, height: "auto" }}
                                                     exit={{ opacity: 0, height: 0 }}
@@ -303,19 +303,17 @@ function StudyPlanner() {
                                                         <div
                                                             key={tIdx}
                                                             onClick={() => handleToggleTask(wIdx, tIdx)}
-                                                            className={`flex items-start gap-3 p-3.5 rounded-xl border cursor-pointer transition-colors duration-200 ${
-                                                                task.completed
+                                                            className={`flex items-start gap-3 p-3.5 rounded-xl border cursor-pointer transition-colors duration-200 ${task.completed
                                                                     ? "border-emerald-100 dark:border-emerald-950/25 bg-emerald-50/5 dark:bg-emerald-950/5 text-slate-400 dark:text-slate-500"
                                                                     : "border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-350 bg-white dark:bg-slate-900"
-                                                            }`}
+                                                                }`}
                                                         >
                                                             <button
                                                                 type="button"
-                                                                className={`w-5 h-5 mt-0.5 shrink-0 rounded border flex items-center justify-center transition-all ${
-                                                                    task.completed
+                                                                className={`w-5 h-5 mt-0.5 shrink-0 rounded border flex items-center justify-center transition-all ${task.completed
                                                                         ? "bg-emerald-600 border-emerald-600 text-white"
                                                                         : "border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900"
-                                                                }`}
+                                                                    }`}
                                                             >
                                                                 {task.completed && <span className="text-[10px] font-bold">✓</span>}
                                                             </button>
@@ -348,24 +346,22 @@ function StudyPlanner() {
                                         day: "numeric"
                                     });
                                     const daysLeft = getDaysLeft(m.dueDate);
-                                    
+
                                     return (
                                         <div
                                             key={mIdx}
                                             onClick={() => handleToggleMilestone(mIdx)}
-                                            className={`border rounded-xl p-3.5 cursor-pointer transition-colors duration-200 flex items-start gap-3 ${
-                                                m.completed
+                                            className={`border rounded-xl p-3.5 cursor-pointer transition-colors duration-200 flex items-start gap-3 ${m.completed
                                                     ? "border-emerald-100 dark:border-emerald-950/20 bg-emerald-50/5 opacity-60"
                                                     : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
-                                            }`}
+                                                }`}
                                         >
                                             <button
                                                 type="button"
-                                                className={`w-4.5 h-4.5 mt-0.5 rounded-full border flex items-center justify-center shrink-0 transition ${
-                                                    m.completed
+                                                className={`w-4.5 h-4.5 mt-0.5 rounded-full border flex items-center justify-center shrink-0 transition ${m.completed
                                                         ? "bg-emerald-600 border-emerald-600 text-white"
                                                         : "border-slate-300 dark:border-slate-650 bg-white dark:bg-slate-900"
-                                                }`}
+                                                    }`}
                                             >
                                                 {m.completed && <span className="text-[9px] font-bold">✓</span>}
                                             </button>
@@ -377,11 +373,10 @@ function StudyPlanner() {
                                                 <div className="flex items-center gap-2 mt-1 text-[10px] text-slate-400 dark:text-slate-500 font-semibold">
                                                     <span>Due: {dateStr}</span>
                                                     {!m.completed && (
-                                                        <span className={`px-2 py-0.5 rounded-full text-[9px] ${
-                                                            daysLeft === "Passed" ? "bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400" :
-                                                            daysLeft === "Today" ? "bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400" :
-                                                            "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400"
-                                                        }`}>
+                                                        <span className={`px-2 py-0.5 rounded-full text-[9px] ${daysLeft === "Passed" ? "bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400" :
+                                                                daysLeft === "Today" ? "bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400" :
+                                                                    "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400"
+                                                            }`}>
                                                             {daysLeft}
                                                         </span>
                                                     )}

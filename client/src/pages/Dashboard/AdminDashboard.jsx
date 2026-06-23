@@ -31,7 +31,7 @@ function AdminDashboard() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.get(
-                "http://localhost:5000/api/admin/stats",
+                "https://praveentech-backend.onrender.com/api/admin/stats",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -52,7 +52,7 @@ function AdminDashboard() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.get(
-                "http://localhost:5000/api/admin/users",
+                "https://praveentech-backend.onrender.com/api/admin/users",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -76,7 +76,7 @@ function AdminDashboard() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.put(
-                `http://localhost:5000/api/admin/users/${targetUserId}/role`,
+                `https://praveentech-backend.onrender.com/api/admin/users/${targetUserId}/role`,
                 { role: nextRole },
                 {
                     headers: {
@@ -100,7 +100,7 @@ function AdminDashboard() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.delete(
-                `http://localhost:5000/api/admin/users/${targetUserId}`,
+                `https://praveentech-backend.onrender.com/api/admin/users/${targetUserId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -127,7 +127,7 @@ function AdminDashboard() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.post(
-                "http://localhost:5000/api/admin/broadcast",
+                "https://praveentech-backend.onrender.com/api/admin/broadcast",
                 { title: broadcastTitle.trim(), message: broadcastMsg.trim() },
                 {
                     headers: {
@@ -151,7 +151,7 @@ function AdminDashboard() {
     return (
         <div className="w-full transition-colors duration-300">
             <div className="max-w-7xl mx-auto">
-                
+
                 {/* Header */}
                 <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div>
@@ -198,16 +198,16 @@ function AdminDashboard() {
                 )}
 
                 <div className="grid md:grid-cols-3 gap-8">
-                    
+
                     {/* Left: Broadcast & AI Config Panels */}
                     <div className="md:col-span-1 space-y-6">
-                        
+
                         {/* Broadcast Notification Broadcaster */}
                         <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
                             <h3 className="font-extrabold text-gray-800 dark:text-slate-100 mb-4 flex items-center gap-1.5 text-base">
                                 <i className="bi bi-megaphone text-indigo-600"></i> Broadcast Notification
                             </h3>
-                            
+
                             <form onSubmit={handleBroadcastSubmit} className="space-y-4">
                                 {broadcastStatus && (
                                     <div className="p-3 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/30 rounded-xl text-xs font-semibold text-indigo-700 dark:text-indigo-455">
@@ -291,7 +291,7 @@ function AdminDashboard() {
                             <h3 className="font-extrabold text-gray-800 dark:text-slate-100 mb-4 flex items-center gap-1.5 text-base">
                                 <i className="bi bi-people text-indigo-600"></i> Candidate Database ({users.length})
                             </h3>
-                            
+
                             {loadingUsers ? (
                                 <div className="text-center py-12 text-gray-400 dark:text-slate-500">Loading active users...</div>
                             ) : (
@@ -307,7 +307,7 @@ function AdminDashboard() {
                                         <tbody className="divide-y divide-slate-100/50 dark:divide-slate-800/50 text-sm">
                                             {users.map((u) => {
                                                 const isSelf = u._id === user?._id;
-                                                
+
                                                 return (
                                                     <tr key={u._id} className="hover:bg-slate-50/30 dark:hover:bg-slate-950/20 transition-colors">
                                                         <td className="py-3.5 px-2">
@@ -315,9 +315,8 @@ function AdminDashboard() {
                                                             <div className="text-[10px] text-gray-400 dark:text-slate-500">{u.email}</div>
                                                         </td>
                                                         <td className="py-3.5 px-2">
-                                                            <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${
-                                                                u.role === "admin" ? "bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-405 border border-red-100 dark:border-red-900/30" : "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-405 border border-indigo-100 dark:border-indigo-900/30"
-                                                            }`}>
+                                                            <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${u.role === "admin" ? "bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-405 border border-red-100 dark:border-red-900/30" : "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-405 border border-indigo-100 dark:border-indigo-900/30"
+                                                                }`}>
                                                                 {u.role}
                                                             </span>
                                                         </td>
@@ -325,9 +324,8 @@ function AdminDashboard() {
                                                             <button
                                                                 onClick={() => handleToggleRole(u._id, u.role)}
                                                                 disabled={isSelf}
-                                                                className={`px-2 py-1.5 rounded-lg border text-xs font-bold transition hover:shadow-sm ${
-                                                                    u.role === "admin" ? "border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-800" : "border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/25"
-                                                                } disabled:opacity-30`}
+                                                                className={`px-2 py-1.5 rounded-lg border text-xs font-bold transition hover:shadow-sm ${u.role === "admin" ? "border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-800" : "border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/25"
+                                                                    } disabled:opacity-30`}
                                                             >
                                                                 {u.role === "admin" ? "Demote" : "Promote"}
                                                             </button>

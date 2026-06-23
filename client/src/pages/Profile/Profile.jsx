@@ -91,7 +91,7 @@ export default function Profile() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.put(
-                "http://localhost:5000/api/users/profile",
+                "https://praveentech-backend.onrender.com/api/users/profile",
                 { name, careerGoal, targetCompany, experienceLevel, twoFactorEnabled, skills, profilePicture: profilePic },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -278,11 +278,10 @@ export default function Profile() {
 
                     {/* Status toast */}
                     {statusMsg && (
-                        <div className={`mb-5 p-4 rounded-2xl text-sm font-semibold flex items-center gap-3 border animate-fadeIn ${
-                            isError
+                        <div className={`mb-5 p-4 rounded-2xl text-sm font-semibold flex items-center gap-3 border animate-fadeIn ${isError
                                 ? "bg-rose-50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-400 border-rose-100 dark:border-rose-900/30"
                                 : "bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900/30"
-                        }`}>
+                            }`}>
                             {isError
                                 ? <AlertTriangle className="w-5 h-5 shrink-0 text-rose-500" />
                                 : <CheckCircle className="w-5 h-5 shrink-0 text-emerald-500" />}
@@ -297,11 +296,10 @@ export default function Profile() {
                                 key={id}
                                 type="button"
                                 onClick={() => setActiveTab(id)}
-                                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                                    activeTab === id
+                                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${activeTab === id
                                         ? "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 shadow-sm"
                                         : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
-                                }`}
+                                    }`}
                             >
                                 <Icon className="w-3.5 h-3.5" />
                                 {label}
@@ -390,11 +388,10 @@ export default function Profile() {
                                                 key={lvl.value}
                                                 type="button"
                                                 onClick={() => setExperienceLevel(lvl.value)}
-                                                className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
-                                                    experienceLevel === lvl.value
+                                                className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${experienceLevel === lvl.value
                                                         ? "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-300 dark:border-indigo-700 ring-2 ring-indigo-500/20"
                                                         : "bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
-                                                }`}
+                                                    }`}
                                             >
                                                 <p className={`text-xs font-bold ${experienceLevel === lvl.value ? "text-indigo-700 dark:text-indigo-400" : "text-slate-700 dark:text-slate-300"}`}>
                                                     {lvl.label}
@@ -514,11 +511,10 @@ export default function Profile() {
                                                 <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1 leading-relaxed max-w-md">
                                                     Add an extra verification step when logging in. Significantly increases account security against unauthorised access.
                                                 </p>
-                                                <span className={`inline-flex items-center gap-1.5 mt-2 text-[10px] font-bold px-2.5 py-1 rounded-full border ${
-                                                    twoFactorEnabled
+                                                <span className={`inline-flex items-center gap-1.5 mt-2 text-[10px] font-bold px-2.5 py-1 rounded-full border ${twoFactorEnabled
                                                         ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400"
                                                         : "bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400"
-                                                }`}>
+                                                    }`}>
                                                     <span className={`w-1.5 h-1.5 rounded-full ${twoFactorEnabled ? "bg-emerald-500" : "bg-amber-500"}`} />
                                                     {twoFactorEnabled ? "Enabled" : "Disabled"}
                                                 </span>
@@ -529,14 +525,12 @@ export default function Profile() {
                                         <button
                                             type="button"
                                             onClick={() => setTwoFactorEnabled(!twoFactorEnabled)}
-                                            className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 shrink-0 mt-1 ${
-                                                twoFactorEnabled ? "bg-indigo-600" : "bg-slate-200 dark:bg-slate-700"
-                                            }`}
+                                            className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 shrink-0 mt-1 ${twoFactorEnabled ? "bg-indigo-600" : "bg-slate-200 dark:bg-slate-700"
+                                                }`}
                                         >
                                             <div
-                                                className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
-                                                    twoFactorEnabled ? "translate-x-6" : "translate-x-0"
-                                                }`}
+                                                className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${twoFactorEnabled ? "translate-x-6" : "translate-x-0"
+                                                    }`}
                                             />
                                         </button>
                                     </div>

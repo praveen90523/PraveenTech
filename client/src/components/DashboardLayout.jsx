@@ -76,7 +76,7 @@ function DashboardLayout() {
             const token = localStorage.getItem("token");
             if (!token) return;
             const res = await axios.get(
-                "http://localhost:5000/api/analytics/notifications",
+                "https://praveentech-backend.onrender.com/api/analytics/notifications",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -95,7 +95,7 @@ function DashboardLayout() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.put(
-                `http://localhost:5000/api/analytics/notifications/${nId}`,
+                `https://praveentech-backend.onrender.com/api/analytics/notifications/${nId}`,
                 {},
                 {
                     headers: {

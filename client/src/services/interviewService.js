@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/interviews";
+const API_URL = "https://praveentech-backend.onrender.com/api/interviews";
 
 const authHeader = () => ({
     headers: {

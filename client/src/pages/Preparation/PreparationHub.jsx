@@ -12,7 +12,7 @@ function PreparationHub() {
     const [role, setRole] = useState("");
     const [company, setCompany] = useState("");
     const [generating, setGenerating] = useState(false);
-    
+
     const [sessions, setSessions] = useState([]);
     const [loadingHistory, setLoadingHistory] = useState(true);
     const [statusMsg, setStatusMsg] = useState("");
@@ -24,7 +24,7 @@ function PreparationHub() {
     const fetchSessions = async () => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.get("http://localhost:5000/api/preparation", {
+            const res = await axios.get("https://praveentech-backend.onrender.com/api/preparation", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.success) {
@@ -47,7 +47,7 @@ function PreparationHub() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.post(
-                "http://localhost:5000/api/preparation/generate",
+                "https://praveentech-backend.onrender.com/api/preparation/generate",
                 {
                     topic: topic.trim(),
                     role: role.trim(),
@@ -87,7 +87,7 @@ function PreparationHub() {
 
             {/* Split Screen Container */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                
+
                 {/* Left: Generator Form */}
                 <div className="lg:col-span-1">
                     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm dark:shadow-lg">
@@ -95,7 +95,7 @@ function PreparationHub() {
                             <Cpu className="w-4.5 h-4.5 text-indigo-500" />
                             <h2 className="font-bold text-slate-850 dark:text-slate-250 text-sm">Initialize Module</h2>
                         </div>
-                        
+
                         <form onSubmit={handleGenerate} className="space-y-4">
                             {statusMsg && (
                                 <div className="p-3.5 bg-rose-50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-400 border border-rose-100 dark:border-rose-900/30 rounded-xl text-[11px] font-semibold flex items-center gap-1.5">
@@ -211,11 +211,10 @@ function PreparationHub() {
                                         <div>
                                             <div className="flex justify-between items-start gap-2 mb-2">
                                                 <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm line-clamp-1">{sess.topic}</h3>
-                                                <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
-                                                    sess.difficulty === "Advanced" ? "bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-900/35" :
-                                                    sess.difficulty === "Intermediate" ? "bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-900/35" :
-                                                    "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/35"
-                                                }`}>
+                                                <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0 ${sess.difficulty === "Advanced" ? "bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-900/35" :
+                                                        sess.difficulty === "Intermediate" ? "bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-900/35" :
+                                                            "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/35"
+                                                    }`}>
                                                     {sess.difficulty}
                                                 </span>
                                             </div>

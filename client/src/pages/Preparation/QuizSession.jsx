@@ -21,7 +21,7 @@ function QuizSession() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.get(
-                `http://localhost:5000/api/preparation/${id}`,
+                `https://praveentech-backend.onrender.com/api/preparation/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -30,7 +30,7 @@ function QuizSession() {
             );
             if (res.data.success && res.data.quiz) {
                 setQuiz(res.data.quiz);
-                
+
                 // Initialize selection state if it was already solved/in-progress
                 if (res.data.quiz.completed) {
                     setResult(res.data.quiz);
@@ -59,7 +59,7 @@ function QuizSession() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         // Validate all answered
         const questionsCount = quiz.questions.length;
         const answeredCount = Object.values(selectedAnswers).filter(val => val !== "").length;
@@ -72,7 +72,7 @@ function QuizSession() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.post(
-                `http://localhost:5000/api/preparation/${id}/quiz/submit`,
+                `https://praveentech-backend.onrender.com/api/preparation/${id}/quiz/submit`,
                 { answers: Object.values(selectedAnswers) },
                 {
                     headers: {
@@ -114,9 +114,9 @@ function QuizSession() {
 
     return (
         <div className="w-full">
-            
+
             <div className="max-w-3xl mx-auto">
-                
+
                 {/* Back button */}
                 <button
                     onClick={() => navigate(`/preparation/${id}`)}
@@ -131,7 +131,7 @@ function QuizSession() {
                         <span className="text-5xl block mb-2">🎉</span>
                         <h2 className="text-2xl font-black text-gray-800">Practice Quiz Completed!</h2>
                         <p className="text-gray-400 text-sm mt-1 mb-6">Review your choices and study explanations below.</p>
-                        
+
                         <div className="inline-block bg-indigo-50 border border-indigo-100 rounded-3xl px-12 py-5 shadow-sm shadow-indigo-50">
                             <span className="text-xs text-gray-400 font-bold block uppercase tracking-widest">Final Score</span>
                             <span className="text-5xl font-black text-indigo-600 mt-1 block">{result.score}%</span>
@@ -144,27 +144,25 @@ function QuizSession() {
                     {quiz.questions.map((q, idx) => {
                         const isGraded = !!result;
                         const selected = isGraded ? q.selectedAnswer : selectedAnswers[idx];
-                        
+
                         return (
                             <div
                                 key={idx}
-                                className={`bg-white border rounded-3xl p-6 shadow-sm transition-all duration-300 ${
-                                    isGraded
+                                className={`bg-white border rounded-3xl p-6 shadow-sm transition-all duration-300 ${isGraded
                                         ? q.isCorrect
                                             ? "border-green-200 bg-green-50/5"
                                             : "border-red-200 bg-red-50/5"
                                         : "border-slate-100"
-                                }`}
+                                    }`}
                             >
                                 <div className="flex items-start gap-3 justify-between">
                                     <h3 className="font-bold text-gray-800 text-base leading-snug">
                                         <span className="text-indigo-600 mr-1.5">{idx + 1}.</span> {q.questionText}
                                     </h3>
-                                    
+
                                     {isGraded && (
-                                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                                            q.isCorrect ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-                                        }`}>
+                                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${q.isCorrect ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                                            }`}>
                                             {q.isCorrect ? "Correct" : "Incorrect"}
                                         </span>
                                     )}
@@ -175,7 +173,7 @@ function QuizSession() {
                                     {q.options.map((opt, oIdx) => {
                                         const isSelected = selected === opt;
                                         const isCorrectKey = q.correctAnswer === opt;
-                                        
+
                                         let optionStyle = "border-slate-200 bg-white text-gray-700 hover:bg-slate-50";
                                         if (isGraded) {
                                             if (isCorrectKey) {

@@ -8,7 +8,7 @@ function CareerAssistant() {
     const [inputText, setInputText] = useState("");
     const [loading, setLoading] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
-    
+
     const messagesEndRef = useRef(null);
     const recognitionRef = useRef(null);
 
@@ -69,7 +69,7 @@ function CareerAssistant() {
     const fetchChatHistory = async () => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.get("http://localhost:5000/api/ai/chat", {
+            const res = await axios.get("https://praveentech-backend.onrender.com/api/ai/chat", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.success) {
@@ -111,7 +111,7 @@ function CareerAssistant() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.post(
-                "http://localhost:5000/api/ai/chat",
+                "https://praveentech-backend.onrender.com/api/ai/chat",
                 { message: text },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -134,7 +134,7 @@ function CareerAssistant() {
         if (!window.confirm("Are you sure you want to clear your chat history?")) return;
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.delete("http://localhost:5000/api/ai/chat", {
+            const res = await axios.delete("https://praveentech-backend.onrender.com/api/ai/chat", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.success) {
@@ -161,10 +161,10 @@ function CareerAssistant() {
             </div>
 
             <div className="max-w-5xl w-full mx-auto flex flex-col md:flex-row gap-6 items-stretch">
-                
+
                 {/* Left side: Coach Info Column */}
                 <div className="w-full md:w-72 shrink-0 flex flex-col gap-5">
-                    
+
                     {/* Bot Card */}
                     <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 shadow-sm dark:shadow-lg">
                         <div className="flex items-center gap-3 mb-4">
@@ -181,7 +181,7 @@ function CareerAssistant() {
                         <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
                             Welcome! I'm Praveen Tech Assistant, your interview coach. Ask me technical problems, system design advice, resume guidelines, or behavioral situations.
                         </p>
-                        
+
                         <div className="mt-5 pt-5 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center text-[10px]">
                             <span className="text-slate-400 dark:text-slate-500 font-bold">XP reward per ask:</span>
                             <span className="text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-105/30">
@@ -207,7 +207,7 @@ function CareerAssistant() {
 
                 {/* Right side: Chat Window */}
                 <div className="flex-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm dark:shadow-lg flex flex-col overflow-hidden h-[500px] md:h-[550px]">
-                    
+
                     {/* Conversations List */}
                     <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
                         {messages.length === 0 ? (
@@ -217,7 +217,7 @@ function CareerAssistant() {
                                 <p className="text-xs text-slate-400 dark:text-slate-500 max-w-xs mt-1 mb-6 font-medium">
                                     Your placement counselor. What would you like to prepare or learn about today?
                                 </p>
-                                
+
                                 <div className="flex flex-col gap-2 max-w-md w-full">
                                     {quickChips.map((chip, idx) => (
                                         <button
@@ -242,11 +242,10 @@ function CareerAssistant() {
                                         </div>
                                     )}
                                     <div
-                                        className={`max-w-[75%] rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-sm font-medium ${
-                                            msg.sender === "user"
+                                        className={`max-w-[75%] rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-sm font-medium ${msg.sender === "user"
                                                 ? "bg-indigo-600 text-white rounded-tr-none"
                                                 : "bg-slate-100 dark:bg-slate-700 text-slate-805 dark:text-slate-100 rounded-tl-none border border-slate-200 dark:border-slate-600"
-                                        }`}
+                                            }`}
                                         style={{ whiteSpace: "pre-line" }}
                                     >
                                         {msg.text}
@@ -284,11 +283,10 @@ function CareerAssistant() {
                         <button
                             type="button"
                             onClick={toggleRecording}
-                            className={`p-3 rounded-xl border transition duration-200 ${
-                                isRecording 
-                                    ? "bg-rose-505 border-rose-505 text-white animate-pulse" 
+                            className={`p-3 rounded-xl border transition duration-200 ${isRecording
+                                    ? "bg-rose-505 border-rose-505 text-white animate-pulse"
                                     : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-750"
-                            }`}
+                                }`}
                             title={isRecording ? "Stop voice listening" : "Start voice listening"}
                         >
                             {isRecording ? <Mic className="w-4.5 h-4.5" /> : <Mic className="w-4.5 h-4.5" />}

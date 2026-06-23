@@ -165,7 +165,7 @@ export default function ResumeIntelligence() {
             </div>
 
             <div className="flex flex-col lg:flex-row max-w-[1600px] w-full mx-auto gap-6 items-stretch">
-                
+
                 {/* Left Sidebar - Resume History */}
                 <div className="w-full lg:w-72 flex flex-col bg-white dark:bg-slate-805 rounded-2xl border border-slate-200 dark:border-slate-700 p-4 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-120px)] overflow-y-auto custom-scrollbar shadow-sm dark:shadow-lg">
                     <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-100 dark:border-slate-700">
@@ -202,19 +202,17 @@ export default function ResumeIntelligence() {
                                     <div
                                         key={item._id}
                                         onClick={() => handleSelectResume(item._id)}
-                                        className={`group relative p-2.5 rounded-xl cursor-pointer border transition-all duration-200 flex items-center gap-3 ${
-                                            isSelected
+                                        className={`group relative p-2.5 rounded-xl cursor-pointer border transition-all duration-200 flex items-center gap-3 ${isSelected
                                                 ? "bg-indigo-50/50 dark:bg-indigo-950/30 border-indigo-200 dark:border-indigo-900 shadow-sm"
                                                 : "bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border-slate-200 dark:border-slate-700"
-                                        }`}
+                                            }`}
                                     >
-                                        <div className={`w-8.5 h-8.5 rounded-lg flex items-center justify-center shrink-0 text-xs font-extrabold ${
-                                            item.atsScore >= 80
+                                        <div className={`w-8.5 h-8.5 rounded-lg flex items-center justify-center shrink-0 text-xs font-extrabold ${item.atsScore >= 80
                                                 ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600"
                                                 : item.atsScore >= 60
-                                                ? "bg-amber-50 dark:bg-amber-950/40 text-amber-600"
-                                                : "bg-rose-50 dark:bg-rose-950/40 text-rose-600"
-                                        }`}>
+                                                    ? "bg-amber-50 dark:bg-amber-950/40 text-amber-600"
+                                                    : "bg-rose-50 dark:bg-rose-950/40 text-rose-600"
+                                            }`}>
                                             {item.atsScore}
                                         </div>
                                         <div className="flex-1 min-w-0">
@@ -230,7 +228,7 @@ export default function ResumeIntelligence() {
                                                 })}
                                             </p>
                                         </div>
-                                        
+
                                         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                                             <button
                                                 onClick={(e) => handleDeleteResume(e, item._id)}
@@ -250,7 +248,7 @@ export default function ResumeIntelligence() {
 
                 {/* Right Side - Analysis Dashboard / Upload Zone */}
                 <div className="flex-1 flex flex-col min-w-0">
-                    
+
                     {/* Error Alerts */}
                     {error && (
                         <div className="bg-rose-50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-450 border border-rose-100 dark:border-rose-900/30 p-4 rounded-xl mb-6 flex items-start gap-3 shadow-sm">
@@ -290,7 +288,7 @@ export default function ResumeIntelligence() {
                             </div>
                         </div>
                     ) : !currentAnalysis ? (
-                        
+
                         /* Upload Form */
                         <div className="flex-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm dark:shadow-lg animate-fadeIn">
                             <div className="mb-6">
@@ -304,7 +302,7 @@ export default function ResumeIntelligence() {
                             </div>
 
                             <form onSubmit={handleAnalyze} className="space-y-5">
-                                
+
                                 {/* Drag & Drop Area */}
                                 <div
                                     onDragEnter={handleDrag}
@@ -312,13 +310,12 @@ export default function ResumeIntelligence() {
                                     onDragLeave={handleDrag}
                                     onDrop={handleDrop}
                                     onClick={handleUploadClick}
-                                    className={`relative border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center group ${
-                                        dragActive
+                                    className={`relative border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center group ${dragActive
                                             ? "border-indigo-500 bg-indigo-50/20"
                                             : file
-                                            ? "border-emerald-500 bg-emerald-50/10"
-                                            : "border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:bg-slate-50 dark:hover:bg-slate-900"
-                                    }`}
+                                                ? "border-emerald-500 bg-emerald-50/10"
+                                                : "border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:bg-slate-50 dark:hover:bg-slate-900"
+                                        }`}
                                 >
                                     <input
                                         type="file"
@@ -405,11 +402,10 @@ export default function ResumeIntelligence() {
                                 <button
                                     type="submit"
                                     disabled={!file}
-                                    className={`w-full py-3.5 rounded-xl font-bold text-white transition-all text-xs flex items-center justify-center gap-1.5 ${
-                                        file
+                                    className={`w-full py-3.5 rounded-xl font-bold text-white transition-all text-xs flex items-center justify-center gap-1.5 ${file
                                             ? "bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] shadow-sm"
                                             : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed shadow-none"
-                                    }`}
+                                        }`}
                                 >
                                     <Sparkles className="w-4 h-4" />
                                     <span>Analyze Resume Report</span>
@@ -417,9 +413,9 @@ export default function ResumeIntelligence() {
                             </form>
                         </div>
                     ) : (
-                                               /* Analysis Report Card Details */
+                        /* Analysis Report Card Details */
                         <div className="flex-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 shadow-sm dark:shadow-lg flex flex-col min-h-0 overflow-y-auto animate-fadeIn">
-                            
+
                             {/* Header */}
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 dark:border-slate-700 pb-4.5 mb-5">
                                 <div>
@@ -441,7 +437,7 @@ export default function ResumeIntelligence() {
                                         <span>Analyzed {new Date(currentAnalysis.createdAt).toLocaleDateString()}</span>
                                         <span>•</span>
                                         <a
-                                            href={`http://localhost:5000${currentAnalysis.resumeUrl}`}
+                                            href={`https://praveentech-backend.onrender.com${currentAnalysis.resumeUrl}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-0.5"
@@ -461,7 +457,7 @@ export default function ResumeIntelligence() {
 
                             {/* Score Ring & Feedback summary */}
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mb-6">
-                                
+
                                 {/* Ring card */}
                                 <div className={`md:col-span-4 rounded-2xl border p-5 flex flex-col items-center justify-center text-center relative overflow-hidden ${getScoreColorClass(currentAnalysis.atsScore)}`}>
                                     <div className="relative w-24 h-24 flex items-center justify-center mb-2.5">
@@ -489,13 +485,13 @@ export default function ResumeIntelligence() {
                                             <span className="text-[8px] uppercase tracking-wider text-slate-450 font-bold">ATS Score</span>
                                         </div>
                                     </div>
-                                    
+
                                     <h3 className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">
                                         {currentAnalysis.atsScore >= 80
                                             ? "Strong Candidate Match"
                                             : currentAnalysis.atsScore >= 60
-                                            ? "Good Match with Gaps"
-                                            : "Needs Refactoring"}
+                                                ? "Good Match with Gaps"
+                                                : "Needs Refactoring"}
                                     </h3>
                                 </div>
 
@@ -524,7 +520,7 @@ export default function ResumeIntelligence() {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             {/* Section tabs */}
                             <div className="flex border-b border-slate-100 dark:border-slate-800/80 mb-5 overflow-x-auto gap-1">
                                 {[
@@ -536,11 +532,10 @@ export default function ResumeIntelligence() {
                                     <button
                                         key={tab.id}
                                         onClick={() => setActiveTab(tab.id)}
-                                        className={`py-2 px-3.5 font-bold text-xs rounded-t-xl transition-all border-b-2 shrink-0 ${
-                                            activeTab === tab.id
+                                        className={`py-2 px-3.5 font-bold text-xs rounded-t-xl transition-all border-b-2 shrink-0 ${activeTab === tab.id
                                                 ? "text-indigo-600 dark:text-indigo-400 border-indigo-600 dark:border-indigo-500 bg-indigo-50/20"
                                                 : "text-slate-400 border-transparent hover:text-slate-600"
-                                        }`}
+                                            }`}
                                     >
                                         {tab.label}
                                     </button>
@@ -549,7 +544,7 @@ export default function ResumeIntelligence() {
 
                             {/* Tab items */}
                             <div className="flex-1 min-h-[250px]">
-                                
+
                                 {activeTab === "all" && (
                                     <div className="space-y-6 animate-fadeIn">
                                         <div>
@@ -647,7 +642,7 @@ export default function ResumeIntelligence() {
                                             <p className="text-[10px] text-slate-400 dark:text-slate-500 mb-4 leading-relaxed">
                                                 Gaps identified by comparing your resume with core requirements.
                                             </p>
-                                            
+
                                             {currentAnalysis.missingSkills?.length > 0 ? (
                                                 <div className="flex flex-wrap gap-2">
                                                     {currentAnalysis.missingSkills.map((skill, i) => (
@@ -717,11 +712,11 @@ export default function ResumeIntelligence() {
                                                                 Technologies Used
                                                             </p>
                                                             <div className="flex flex-wrap gap-1">
-                                                                  {proj.technologies.map((t, idx) => (
-                                                                      <span key={idx} className="text-[9px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded">
-                                                                          {t}
-                                                                      </span>
-                                                                  ))}
+                                                                {proj.technologies.map((t, idx) => (
+                                                                    <span key={idx} className="text-[9px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded">
+                                                                        {t}
+                                                                    </span>
+                                                                ))}
                                                             </div>
                                                         </div>
                                                     )}
