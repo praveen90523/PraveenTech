@@ -21,12 +21,12 @@ function useCountUp(target, duration = 1800, started = false) {
 
 /* ─── Features dropdown data ─── */
 const NAV_FEATURES = [
-    { icon: "🎙️", label: "AI Mock Interviews",  desc: "Real-time practice sessions with instant scoring" },
-    { icon: "📄", label: "Resume Intelligence",  desc: "ATS analysis & actionable resume tips" },
-    { icon: "🤖", label: "AI Career Coach",      desc: "Personalized career Q&A chatbot assistant" },
-    { icon: "🧠", label: "AI Prep Hub",          desc: "Topic-level roadmaps, quizzes & coding tasks" },
-    { icon: "📅", label: "Study Planner",        desc: "Week-by-week personalised prep schedules" },
-    { icon: "🏆", label: "Leaderboard & Streaks",desc: "XP, achievements & global candidate rankings" },
+    { icon: "🎙️", label: "AI Mock Interviews", desc: "Real-time practice sessions with instant scoring" },
+    { icon: "📄", label: "Resume Intelligence", desc: "ATS analysis & actionable resume tips" },
+    { icon: "🤖", label: "AI Career Coach", desc: "Personalized career Q&A chatbot assistant" },
+    { icon: "🧠", label: "AI Prep Hub", desc: "Topic-level roadmaps, quizzes & coding tasks" },
+    { icon: "📅", label: "Study Planner", desc: "Week-by-week personalised prep schedules" },
+    { icon: "🏆", label: "Leaderboard & Streaks", desc: "XP, achievements & global candidate rankings" },
 ];
 
 /* ─── Feature cards data ─── */
@@ -237,9 +237,8 @@ function Home() {
 
             {/* ══════════════ NAVBAR ══════════════ */}
             <header
-                className={`sticky top-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-lg border-b transition-all duration-300 ${
-                    scrolled ? "border-slate-200 dark:border-slate-800 shadow-sm shadow-slate-100 dark:shadow-none" : "border-transparent"
-                }`}
+                className={`sticky top-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-lg border-b transition-all duration-300 ${scrolled ? "border-slate-200 dark:border-slate-800 shadow-sm shadow-slate-100 dark:shadow-none" : "border-transparent"
+                    }`}
             >
                 <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                     {/* Logo */}
@@ -257,11 +256,10 @@ function Home() {
                         <div className="relative" ref={dropdownRef}>
                             <button
                                 onClick={() => setFeaturesOpen((v) => !v)}
-                                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl transition-colors ${
-                                    featuresOpen
+                                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl transition-colors ${featuresOpen
                                         ? "text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/50"
                                         : "hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-900/50"
-                                }`}
+                                    }`}
                             >
                                 Features
                                 <svg
@@ -305,19 +303,6 @@ function Home() {
                                 </div>
                             )}
                         </div>
-
-                        <a
-                            href="#pricing"
-                            className="px-4 py-2 rounded-xl hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors"
-                        >
-                            Pricing
-                        </a>
-                        <a
-                            href="#testimonials"
-                            className="px-4 py-2 rounded-xl hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors"
-                        >
-                            Reviews
-                        </a>
                     </nav>
 
                     {/* CTA Buttons */}
@@ -401,11 +386,11 @@ function Home() {
                     {/* Social Proof Avatars */}
                     <div className="flex items-center justify-center gap-3 text-sm text-slate-500 dark:text-slate-400 font-medium">
                         <div className="flex -space-x-2">
-                            {["PS","AM","SW","KR","RB"].map((init, i) => (
+                            {["PS", "AM", "SW", "KR", "RB"].map((init, i) => (
                                 <div
                                     key={i}
                                     className="w-9 h-9 rounded-full border-2 border-white dark:border-slate-950 flex items-center justify-center text-[10px] font-black"
-                                    style={{ background: ["#e0e7ff","#d1fae5","#ede9fe","#fef3c7","#fce7f3"][i], color: ["#4f46e5","#059669","#7c3aed","#d97706","#db2777"][i] }}
+                                    style={{ background: ["#e0e7ff", "#d1fae5", "#ede9fe", "#fef3c7", "#fce7f3"][i], color: ["#4f46e5", "#059669", "#7c3aed", "#d97706", "#db2777"][i] }}
                                 >
                                     {init}
                                 </div>
@@ -554,11 +539,10 @@ function Home() {
                             >
                                 {/* Badge */}
                                 {p.badge && (
-                                    <span className={`absolute -top-3.5 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap ${
-                                        p.badge === "Most Popular"
+                                    <span className={`absolute -top-3.5 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap ${p.badge === "Most Popular"
                                             ? "bg-indigo-600 text-white shadow-md shadow-indigo-200"
                                             : "bg-violet-600 text-white shadow-md shadow-violet-200"
-                                    }`}>
+                                        }`}>
                                         {p.badge === "Most Popular" ? "⭐ " : "🏢 "}{p.badge}
                                     </span>
                                 )}
@@ -697,7 +681,7 @@ function Home() {
                                 Praveen Tech is an AI-powered career preparation ecosystem helping candidates master technical and behavioural interviews.
                             </p>
                             <div className="flex gap-3 mt-5">
-                                {["Twitter","LinkedIn","GitHub"].map((s) => (
+                                {["Twitter", "LinkedIn", "GitHub"].map((s) => (
                                     <a
                                         key={s}
                                         href="#"
@@ -712,7 +696,7 @@ function Home() {
                         <div>
                             <h4 className="text-xs font-black text-white uppercase tracking-widest mb-4">Product</h4>
                             <ul className="space-y-2.5">
-                                {["Features","Pricing","Testimonials","Blog"].map((l) => (
+                                {["Features", "Pricing", "Testimonials", "Blog"].map((l) => (
                                     <li key={l}>
                                         <a href="#" className="text-sm text-slate-500 dark:text-slate-450 hover:text-white transition">{l}</a>
                                     </li>
@@ -722,7 +706,7 @@ function Home() {
                         <div>
                             <h4 className="text-xs font-black text-white uppercase tracking-widest mb-4">Company</h4>
                             <ul className="space-y-2.5">
-                                {["About","Careers","Privacy Policy","Terms of Service"].map((l) => (
+                                {["About", "Careers", "Privacy Policy", "Terms of Service"].map((l) => (
                                     <li key={l}>
                                         <a href="#" className="text-sm text-slate-500 dark:text-slate-450 hover:text-white transition">{l}</a>
                                     </li>
