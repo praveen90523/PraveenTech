@@ -4,7 +4,7 @@ Praveen Tech is a modern MERN stack web application designed to showcase technol
 
 ## 🌐 Live Demo
 
-https://your-live-url.vercel.app
+https://praveen-tech.vercel.app/
 
 ---
 
